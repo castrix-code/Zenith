@@ -1,9 +1,15 @@
 {
   "version": 2,
   "builds": [
-    { "src": "server.js", "use": "@vercel/node" }
+    { "src": "server.js", "use": "@vercel/node" },
+    { "src": "*.html", "use": "@vercel/static" },
+    { "src": "*.css", "use": "@vercel/static" },
+    { "src": "*.js", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/(.*)", "dest": "server.js" }
+    { "src": "/create-checkout-session", "dest": "server.js" },
+    { "src": "/webhook", "dest": "server.js" },
+    { "src": "/verify-license", "dest": "server.js" },
+    { "src": "/(.*)", "dest": "/$1" }
   ]
 }
