@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Welcome to Zenith Pro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+<style>
+  .success-wrap {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 32px;
+  }
+  .success-icon {
+    width: 72px;
+    height: 72px;
+    background: rgba(29,158,117,0.15);
+    border: 0.5px solid #1D9E75;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 28px;
+  }
+  .license-box {
+    background: rgba(127,119,221,0.08);
+    border: 0.5px solid rgba(127,119,221,0.4);
+    border-radius: 12px;
+    padding: 20px 28px;
+    margin: 28px 0;
+    max-width: 480px;
+  }
+  .license-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .license-key {
+    font-family: 'DM Mono', monospace;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ascent);
+    letter-spacing: 0.08em;
+    word-break: break-all;
+  }
+  .copy-btn {
+    margin-top: 12px;
+    padding: 7px 16px;
+    background: transparent;
+    border: 0.5px solid var(--border);
+    border-radius: 7px;
+    color: var(--muted);
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+  .copy-btn:hover { border-color: var(--peak); color: var(--ascent); }
+  .next-steps {
+    text-align: left;
+    max-width: 440px;
+    margin: 0 auto 36px;
+  }
+  .next-steps li {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 8px 0;
+    border-bottom: 0.5px solid var(--border);
+    display: flex;
+    gap: 10px;
+  }
+  .next-steps li:last-child { border-bottom: none; }
+  .step-check {
+    color: #1D9E75;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a class="nav-logo" href="index.html">
+      <svg width="22" height="22" viewBox="0 0 48 48" fill="none">
+        <polygon points="24,4 44,40 4,40" stroke="#7F77DD" stroke-width="2.5" fill="none" stroke-linejoin="round"/>
+        <polygon points="14,40 24,20 34,40" fill="#7F77DD" opacity="0.5"/>
+        <circle cx="24" cy="4" r="3" fill="#fff"/>
+      </svg>
+      <span>ZENITH</span>
+    </a>
+  </div>
+</nav>
+
+<div class="success-wrap">
+  <div class="success-icon">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+      <polyline points="7,16 13,22 25,10" stroke="#1D9E75" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <div class="section-label">Payment confirmed</div>
+  <h2>Welcome to<br/><em>Zenith Pro.</em></h2>
+  <p style="color:var(--muted);font-size:16px;margin:16px 0 0;max-width:400px;">
+    Your license key is below. Save it — you'll need it to activate Pro features in the extension.
+  </p>
+
+  <div class="license-box">
+    <p class="license-label">Your license key</p>
+    <p class="license-key" id="license-key">Loading…</p>
+    <button class="copy-btn" id="copy-btn">Copy key</button>
+  </div>
+
+  <div class="next-steps">
+    <ul style="list-style:none;">
+      <li><span class="step-check">①</span> Click the Zenith extension icon in Chrome</li>
+      <li><span class="step-check">②</span> Go to Settings → Enter license key</li>
+      <li><span class="step-check">③</span> All Pro features unlock immediately</li>
+      <li><span class="step-check">④</span> Your key is also emailed to you</li>
+    </ul>
+  </div>
+
+  <a href="index.html" class="btn-ghost">← Back to homepage</a>
+</div>
+
+<script>
+  // In production: fetch the license key from your server using the session_id
+  const params  = new URLSearchParams(window.location.search);
+  const session = params.get("session_id");
+
+  // TODO: Replace this with a real fetch to your server:
+  // fetch(`/get-license?session_id=${session}`)
+  //   .then(r => r.json())
+  //   .then(d => document.getElementById("license-key").textContent = d.key)
+
+  // Placeholder for testing
+  document.getElementById("license-key").textContent = session
+    ? "ZNT-" + session.slice(-24).toUpperCase()
+    : "ZNT-XXXXXXXXXXXXXXXXXXXXXXXXXXXX";
+
+  document.getElementById("copy-btn").addEventListener("click", () => {
+    const key = document.getElementById("license-key").textContent;
+    navigator.clipboard.writeText(key).then(() => {
+      document.getElementById("copy-btn").textContent = "Copied!";
+      setTimeout(() => {
+        document.getElementById("copy-btn").textContent = "Copy key";
+      }, 2000);
+    });
+  });
+</script>
+
+</body>
+</html>
