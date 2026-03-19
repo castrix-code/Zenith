@@ -16,9 +16,9 @@
 //   6. Set SERVER_URL to your deployed server URL
 // ─────────────────────────────────────────────────────────────────────────────
 
-const STRIPE_PUBLIC_KEY = "pk_live_YOUR_KEY_HERE";   // ← replace this
-const STRIPE_PRICE_ID   = "price_YOUR_PRICE_ID_HERE"; // ← replace this
-const SERVER_URL        = "https://your-server.vercel.app"; // ← replace this
+const STRIPE_PUBLIC_KEY = "pk_live_51TC5MRQ1UZaIHEZl4J8asEsWFhU8iXSjnGVDUZrX4VsHUSgzen1Nl4g64AIYxIjtu29k2IUcOlXCVjp9J8N8XfQ600NTwbBliX";   // ← replace this
+const STRIPE_PRICE_ID   = "price_1TCVlzQ1UZaIHEZlc3SELTeY"; // ← replace this
+const SERVER_URL        = "https://zenith-gamma-five.vercel.app"; // ← replace this
 
 // ── Stripe checkout ───────────────────────────────────────────────────────────
 const stripe = Stripe(STRIPE_PUBLIC_KEY);
